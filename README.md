@@ -1,18 +1,17 @@
-match-media-mocks
-=================
+react-native-match-media
+========================
 
-Server and React-Native mocks for matchMedia.
+`window.matchMedia` mock for React Native
+
+Has a peer dependency of [walmartreact/react-native-orientation-listener](https://github.com/walmartreact/react-native-orientation-listener), so make sure that's installed first.
 
 ## Usage
 
 ```js
-import { Platform } from 'react-native'
-import { nativeMatchMedia, serverMatchMedia } from 'match-media-mocks'
+import matchMedia from 'react-native-match-media'
 
-if (Platform.OS === 'ios' || Platform.OS === 'android') {
-  window.matchMedia = nativeMatchMedia
-} else if (Platform.OS === 'web' && !window.matchMedia) {
-  window.matchMedia = serverMatchMedia
+if (matchMedia('(min-width: 400px)').matches) {
+  // Do something
 }
 ```
 

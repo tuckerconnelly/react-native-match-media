@@ -1,12 +1,9 @@
 {
-  "name": "match-media-mocks",
+  "name": "react-native-match-media",
   "version": "0.0.1",
-  "description": "matchMedia mocks for Node and React Native",
-  "main": "src/index.js",
+  "description": "window.matchMedia mock for React Native",
+  "main": "index.js",
   "scripts": {
-    "prebuild": "rimraf lib",
-    "build": "babel ./src --out-dir ./lib",
-    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -15,8 +12,7 @@
   "homepage": "https://github.com/tuckerconnelly/match-media-mocks.git",
   "keywords": [
     "matchMedia",
-    "React Native",
-    "Node"
+    "React Native"
   ],
   "author": "Tucker Connelly <web@tuckerconnelly.com>",
   "license": "MIT",
@@ -32,7 +28,8 @@
     "eslint-plugin-react": "^3.16.1"
   },
   "peerDependencies": {
-    "react-native": "^0.22.2"
+    "react-native": "^0.22.2",
+    "react-native-orientation-listener": "0.0.4"
   },
   "dependencies": {
     "css-mediaquery": "^0.1.2",

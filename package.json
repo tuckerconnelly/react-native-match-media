@@ -2,7 +2,7 @@
   "name": "match-media-mocks",
   "version": "0.0.1",
   "description": "matchMedia mocks for Node and React Native",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
     "prebuild": "rimraf lib",
     "build": "babel ./src --out-dir ./lib",
@@ -24,12 +24,18 @@
     "babel-cli": "^6.4.0",
     "babel-core": "^6.4.0",
     "babel-eslint": "^4.1.8",
+    "babel-plugin-react-intl": "^2.1.1",
     "babel-preset-react-native": "^1.5.3",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^5.0.0",
     "eslint-plugin-babel": "^3.1.0",
     "eslint-plugin-react": "^3.16.1"
   },
-  "peerDependencies": {},
-  "dependencies": {}
+  "peerDependencies": {
+    "react-native": "^0.22.2"
+  },
+  "dependencies": {
+    "css-mediaquery": "^0.1.2",
+    "lodash": "^4.6.1"
+  }
 }

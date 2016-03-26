@@ -9,7 +9,6 @@ class NativeMediaQueryList {
 
   constructor(mediaQueryString) {
     this._query = mediaQueryString
-    this._dimensions = Dimensions.get('window')
     Orientation.getOrientation(orientation => {
       this._notifyListeners({ orientation })
     })

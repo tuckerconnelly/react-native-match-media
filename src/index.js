@@ -1,6 +1,8 @@
-import { Dimensions } from 'react-native'
+import { Dimensions, Platform } from 'react-native-universal'
 import mediaQuery from 'css-mediaquery'
-import Orientation from 'react-native-orientation-listener'
+
+let Orientation
+if (Platform.OS !== 'web') Orientation = require('react-native-orientation-listener')
 
 class NativeMediaQueryList {
   _listeners = [];
@@ -48,4 +50,6 @@ class NativeMediaQueryList {
   }
 }
 
-export default mediaQueryString => new NativeMediaQueryList(mediaQueryString)
+export default window.matchMedia ?
+  window.matchMedia :
+  mediaQueryString => new NativeMediaQueryList(mediaQueryString)

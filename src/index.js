@@ -50,6 +50,9 @@ class NativeMediaQueryList {
   }
 }
 
-export default window.matchMedia ?
-  window.matchMedia :
-  mediaQueryString => new NativeMediaQueryList(mediaQueryString)
+// Mock window.matchMedia for server-side rendering
+const windowMatchMedia = window.matchMedia ? window.matchMedia : () => ({})
+
+export default Platform.OS !== 'web' ?
+  mediaQueryString => new NativeMediaQueryList(mediaQueryString) :
+  windowMatchMedia

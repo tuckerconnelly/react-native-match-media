@@ -33,7 +33,8 @@
     "eslint-plugin-react": "^3.16.1"
   },
   "peerDependencies": {
-    "react-native": "^0.22.2",
+    "react-native": "",
+    "react-native-universal": "",
     "react-native-orientation-listener": "0.0.4"
   },
   "dependencies": {

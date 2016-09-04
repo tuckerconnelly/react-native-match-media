@@ -38,7 +38,6 @@
     "react-native-orientation-listener": "0.0.4"
   },
   "dependencies": {
-    "css-mediaquery": "^0.1.2",
-    "lodash": "^4.6.1"
+    "css-mediaquery": "^0.1.2"
   }
 }

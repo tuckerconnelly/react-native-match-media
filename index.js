@@ -1,8 +1,6 @@
-import { Dimensions, Platform } from 'react-native-universal'
+import { Dimensions } from 'react-native-universal'
 import mediaQuery from 'css-mediaquery'
-
-let Orientation
-if (Platform.OS !== 'web') Orientation = require('react-native-orientation-listener')
+import Orientation from 'react-native-orientation-listener'
 
 class NativeMediaQueryList {
   _listeners = [];
@@ -20,16 +18,10 @@ class NativeMediaQueryList {
     })
   }
 
-  get _dimensions() {
-    const { width, height } = Dimensions.get('window')
-    if (this._orientation === 'PORTRAIT') return { width, height }
-    return { width: height, height: width }
-  }
-
   get matches() {
     return mediaQuery.match(this._query, {
       type: 'screen',
-      ...this._dimensions,
+      ...Dimensions.get('window'),
     })
   }
 
@@ -50,9 +42,4 @@ class NativeMediaQueryList {
   }
 }
 
-// Mock window.matchMedia for server-side rendering
-const windowMatchMedia = window.matchMedia ? window.matchMedia : () => ({})
-
-export default Platform.OS !== 'web' ?
-  mediaQueryString => new NativeMediaQueryList(mediaQueryString) :
-  windowMatchMedia
+export default mediaQueryString => new NativeMediaQueryList(mediaQueryString)

@@ -1,7 +1,7 @@
 react-native-match-media
 ========================
 
-`window.matchMedia` mock for React Native
+`window.matchMedia` polyfill for React Native
 
 Has a peer dependency of [walmartreact/react-native-orientation-listener](https://github.com/walmartreact/react-native-orientation-listener), so make sure that's installed first.
 
@@ -10,7 +10,11 @@ Has a peer dependency of [walmartreact/react-native-orientation-listener](https:
 ```js
 import matchMedia from 'react-native-match-media'
 
-if (matchMedia('(min-width: 400px)').matches) {
+global.matchMedia = matchMedia
+```
+
+```js
+if (global.matchMedia('(min-width: 400px)').matches) {
   // Do something
 }
 ```

@@ -28,9 +28,9 @@
     "eslint-plugin-react": "^3.16.1"
   },
   "peerDependencies": {
-    "react-native": "",
-    "react-native-universal": "",
-    "react-native-orientation-listener": "0.0.4"
+    "react-native": ">=0.36.0",
+    "react-native-universal": ">=0.0.0",
+    "react-native-orientation-listener": ">=0.0.4"
   },
   "dependencies": {
     "css-mediaquery": "^0.1.2"

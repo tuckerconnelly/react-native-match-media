@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native-universal'
+import { Dimensions } from 'react-native'
 import mediaQuery from 'css-mediaquery'
 import Orientation from 'react-native-orientation-listener'
 

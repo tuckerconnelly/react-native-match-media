@@ -1,6 +1,6 @@
-import { Dimensions } from 'react-native'
-import mediaQuery from 'css-mediaquery'
-import Orientation from 'react-native-orientation-listener'
+import { Dimensions } from 'react-native';
+import mediaQuery from 'css-mediaquery';
+import Orientation from 'react-native-orientation';
 
 class NativeMediaQueryList {
   _listeners = [];
@@ -8,12 +8,10 @@ class NativeMediaQueryList {
   _orientation = 'PORTRAIT';
 
   constructor(mediaQueryString) {
-    this._query = mediaQueryString
-    Orientation.getOrientation(orientation => {
-      this._notifyListeners({ orientation })
-    })
-
-    Orientation.addListener(e => {
+    this._query = mediaQueryString;
+    this._orientation = Orientation.getInitialOrientation();
+    console.log(this._orientation);
+    Orientation.addOrientationListener(e => {
       this._notifyListeners(e)
     })
   }
@@ -26,19 +24,21 @@ class NativeMediaQueryList {
   }
 
   _notifyListeners(e) {
-    this._orientation = e.orientation
+    this._orientation = e;
+    console.log(this._orientation);
     this._listeners.forEach(listener => {
-      listener(this)
+      listener(this);
     })
   }
 
   addListener(listener) {
-    this._listeners.push(listener)
+    this._listeners.push(listener);
   }
+
   removeListener(listener) {
-    const index = this._listeners.indexOf(listener)
-    if (index === -1) return
-    this._listeners.splice(index)
+    const index = this._listeners.indexOf(listener);
+    if (index === -1) return;
+    this._listeners.splice(index);
   }
 }
 

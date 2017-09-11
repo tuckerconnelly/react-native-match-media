@@ -10,7 +10,6 @@ class NativeMediaQueryList {
   constructor(mediaQueryString) {
     this._query = mediaQueryString;
     this._orientation = Orientation.getInitialOrientation();
-    console.log(this._orientation);
     Orientation.addOrientationListener(e => {
       this._notifyListeners(e)
     })
@@ -25,7 +24,6 @@ class NativeMediaQueryList {
 
   _notifyListeners(e) {
     this._orientation = e;
-    console.log(this._orientation);
     this._listeners.forEach(listener => {
       listener(this);
     })

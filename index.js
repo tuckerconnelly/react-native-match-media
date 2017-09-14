@@ -1,21 +1,24 @@
-import { Dimensions } from 'react-native'
-import mediaQuery from 'css-mediaquery'
-import Orientation from 'react-native-orientation-listener'
+import { Dimensions } from 'react-native';
+import RCTDeviceEventEmitter from 'react-native/Libraries/EventEmitter/RCTDeviceEventEmitter';
+import mediaQuery from 'css-mediaquery';
 
 class NativeMediaQueryList {
   _listeners = [];
   _query = '';
-  _orientation = 'PORTRAIT';
 
   constructor(mediaQueryString) {
-    this._query = mediaQueryString
-    Orientation.getOrientation(orientation => {
-      this._notifyListeners({ orientation })
-    })
-
-    Orientation.addListener(e => {
-      this._notifyListeners(e)
-    })
+    this._query = mediaQueryString;
+    if(Dimensions.addEventListener) {
+      Dimensions.addEventListener('change', e => {
+          this._notifyListeners(e)
+        }
+      )
+    } else {
+      // In case of using react native 0.42
+      RCTDeviceEventEmitter.addListener('didUpdateDimensions', (e) => {
+        this._notifyListeners(e);
+      });
+    }
   }
 
   get matches() {
@@ -25,21 +28,21 @@ class NativeMediaQueryList {
     })
   }
 
-  _notifyListeners(e) {
-    this._orientation = e.orientation
+  _notifyListeners() {
     this._listeners.forEach(listener => {
-      listener(this)
+      listener(this);
     })
   }
 
   addListener(listener) {
-    this._listeners.push(listener)
+    this._listeners.push(listener);
   }
+
   removeListener(listener) {
-    const index = this._listeners.indexOf(listener)
-    if (index === -1) return
-    this._listeners.splice(index)
+    const index = this._listeners.indexOf(listener);
+    if (index === -1) return;
+    this._listeners.splice(index);
   }
 }
 
-export default mediaQueryString => new NativeMediaQueryList(mediaQueryString)
+export default mediaQueryString => new NativeMediaQueryList(mediaQueryString);

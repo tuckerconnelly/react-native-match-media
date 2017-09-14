@@ -3,8 +3,6 @@ react-native-match-media
 
 `window.matchMedia` polyfill for React Native
 
-Has a peer dependency of [walmartreact/react-native-orientation-listener](https://github.com/walmartreact/react-native-orientation-listener), so make sure that's installed first.
-
 ## Usage
 
 ```js

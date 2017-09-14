@@ -1,18 +1,16 @@
 import { Dimensions } from 'react-native';
 import mediaQuery from 'css-mediaquery';
-import Orientation from 'react-native-orientation';
 
 class NativeMediaQueryList {
   _listeners = [];
   _query = '';
-  _orientation = 'PORTRAIT';
 
   constructor(mediaQueryString) {
     this._query = mediaQueryString;
-    this._orientation = Orientation.getInitialOrientation();
-    Orientation.addOrientationListener(e => {
-      this._notifyListeners(e)
-    })
+    Dimensions.addEventListener('change', e => {
+        this._notifyListeners(e)
+      }
+    )
   }
 
   get matches() {
@@ -22,8 +20,7 @@ class NativeMediaQueryList {
     })
   }
 
-  _notifyListeners(e) {
-    this._orientation = e;
+  _notifyListeners() {
     this._listeners.forEach(listener => {
       listener(this);
     })

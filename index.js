@@ -1,4 +1,5 @@
 import { Dimensions } from 'react-native';
+import RCTDeviceEventEmitter from 'react-native/Libraries/EventEmitter/RCTDeviceEventEmitter';
 import mediaQuery from 'css-mediaquery';
 
 class NativeMediaQueryList {
@@ -7,10 +8,17 @@ class NativeMediaQueryList {
 
   constructor(mediaQueryString) {
     this._query = mediaQueryString;
-    Dimensions.addEventListener('change', e => {
-        this._notifyListeners(e)
-      }
-    )
+    if(Dimensions.addEventListener) {
+      Dimensions.addEventListener('change', e => {
+          this._notifyListeners(e)
+        }
+      )
+    } else {
+      // In case of using react native 0.42
+      RCTDeviceEventEmitter.addListener('didUpdateDimensions', (e) => {
+        this._notifyListeners(e);
+      });
+    }
   }
 
   get matches() {
@@ -37,4 +45,4 @@ class NativeMediaQueryList {
   }
 }
 
-export default mediaQueryString => new NativeMediaQueryList(mediaQueryString)
+export default mediaQueryString => new NativeMediaQueryList(mediaQueryString);
